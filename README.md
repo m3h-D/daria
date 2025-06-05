@@ -55,23 +55,23 @@ pip install -r requirements.txt
    
    ```python
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'daria-db',
-            'USER': os.getenv("MYSQL_USER"),
-            'PASSWORD': os.getenv("MYSQL_PASSWORD"),
-            'HOST': 'localhost',
-            'PORT': '3306',
-        },
-        'mongo': {
-                'ENGINE': 'djongo',
-                'NAME': 'daria-db',
-                'ENFORCE_SCHEMA': False,
-                'CLIENT': {
-                    'host': os.getenv("MONGO_HOST")
-                }  
-            }
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'daria-db',
+        'USER': os.getenv("_MYSQL_USER"),
+        'PASSWORD': os.getenv("MYSQL_PASSWORD"),
+        'HOST': os.getenv("MYSQL_HOST"),
+        'PORT': os.getenv("MYSQL_PORT"),
+    },
+    'mongo': {
+            'ENGINE': 'djongo',
+            'NAME': os.getenv('MONGODB_NAME'),
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': os.getenv("MONGO_HOST")
+            }  
+        }
+   }
    ```
 
 5. **Run migrations**
@@ -113,6 +113,7 @@ The project includes REST API endpoints. Common endpoints might include:
 - `GET /api/data/` - Cross and Long data concatenation
 - `GET /api/rf_result/` - XGBoost result
 - `GET /api/y_result/` - Predict probability result
+- `POST /api/result/` - store result to mongodb
 
 ## Project Structure
 
@@ -123,6 +124,12 @@ DariaProject/
 ├── .env
 ├── requirements.txt
 ├── README.md
+├── prompt_screenshots/
+│   ├── 1.png
+│   ├── 2.png
+│   ├── 3.png
+│   ├── 4.png
+│   ├── 5.png
 ├── trainer/
 │   ├── __init__.py
 │   ├── config.yml
