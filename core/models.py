@@ -38,3 +38,10 @@ class Long(models.Model):
     asf = models.FloatField(db_column="ASF")
     
     objects = BaseManager()
+    
+    
+class Result(models.Model):
+    user_id = models.BigIntegerField()
+    result = models.JSONField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

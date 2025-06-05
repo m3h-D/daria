@@ -1,10 +1,12 @@
 import json
+import pandas as pd
 from asgiref.sync import sync_to_async
 from adrf.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+
 from core.models import Cross , Long
-import pandas as pd
+from core.api.serializers import ResultSerailizer
 from trainer.helper import TrainHandler
 
 
@@ -73,3 +75,9 @@ class CoreViewSet(ViewSet):
         combined_records = combined_df.to_json(orient='records')
 
         return Response(json.loads(combined_records))
+    
+    async def store_result(self, request):
+        serializer = ResultSerailizer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = await serializer.asave(user_id=request.user.id)
+        return Response(json.loads(data), status=201)

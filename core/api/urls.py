@@ -10,4 +10,5 @@ urlpatterns = [
     path('data/', CoreViewSet.as_view({'get': 'data'}), name='data'),
     path('rf_result/', CoreViewSet.as_view({'get': 'rf_result'}), name='rf_result'),
     path('y_result/', CoreViewSet.as_view({'get': 'y_result'}), name='y_result'),
+    path('result/', CoreViewSet.as_view({'post': 'store_result'}), name='result'),
 ]

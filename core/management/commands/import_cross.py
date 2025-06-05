@@ -1,8 +1,8 @@
 import os
 import pandas as pd
-from pymongo import MongoClient
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
+from core.utils import MongoHelper
 
 
 class Command(BaseCommand):
@@ -13,9 +13,7 @@ class Command(BaseCommand):
         parser.add_argument('fp', type=str, help="Path to csv file", default=default_path)
         
     def handle(self, *args, **options) -> str | None:
-        client = MongoClient(os.getenv("MONGO_HOST"))
-        db = client["daria-db"]
-        collection = db["core_cross"]
+        collection = MongoHelper().collection("core_cross")
         file_path =  options['fp']
         if not file_path.endswith('.csv'):
             raise CommandError("File must be in csv format.")

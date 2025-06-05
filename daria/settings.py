@@ -88,7 +88,7 @@ DATABASES = {
     },
     'mongo': {
             'ENGINE': 'djongo',
-            'NAME': 'daria-db',
+            'NAME': os.getenv('MONGODB_NAME'),
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
                 'host': os.getenv("MONGO_HOST")
